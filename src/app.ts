@@ -17,10 +17,12 @@ export const app = async () => {
   console.log('cost:', cost)
   console.log('enough balance:', enoughBalance)
 
-  if (enoughBalance) {
-    const order = await placeOrder(FTX_CRYPTO_PAIR, purchaseQuantity)
-    console.log('order:', order)
+  if (!enoughBalance) {
+    throw new Error("not enough funds available")
   }
 
-  process.exit();
+  const order = await placeOrder(FTX_CRYPTO_PAIR, purchaseQuantity)
+  console.log('order:', order)
+
+  return { balance, ethPrice, cost, enoughBalance, order }
 }
