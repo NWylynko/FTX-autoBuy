@@ -26,6 +26,7 @@ __metadata:
     "@tsconfig/node14": ^1.0.1
     "@types/node": ^16.7.10
     axios: ^0.21.1
+    dotenv: ^10.0.0
     source-map-support: ^0.5.19
     typescript: ^4.4.2
   languageName: unknown
@@ -44,6 +45,13 @@ __metadata:
   version: 1.1.2
   resolution: "buffer-from@npm:1.1.2"
   checksum: 0448524a562b37d4d7ed9efd91685a5b77a50672c556ea254ac9a6d30e3403a517d8981f10e565db24e8339413b43c97ca2951f10e399c6125a0d8911f5679bb
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "dotenv@npm:10.0.0"
+  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
