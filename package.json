@@ -6,8 +6,8 @@
     "start": "yarn node dist"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "dotenv": "^10.0.0",
+    "ftx-api": "^1.0.14",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {

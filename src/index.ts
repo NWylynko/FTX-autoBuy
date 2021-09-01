@@ -1,8 +1,7 @@
 import "source-map-support/register"
 import "dotenv/config"
 
-import Axios from "axios"
-import crypto from "crypto"
+import { RestClient } from 'ftx-api';
 
 const { 
   FTX_API_KEY, 
@@ -34,48 +33,34 @@ if (!FTX_CRYPTO_AMOUNT) {
   throw new Error("FTX_CRYPTO_AMOUNT is not set")
 }
 
-const axios = Axios.create({
-  baseURL: FTX_REST_ENDPOINT
-})
+const ftx = new RestClient(
+  FTX_API_KEY,
+  FTX_API_SECRET,
+);
 
-const getWallet = async () => {
+interface Response<T> {
+  success: false;
+  error?: string;
+  result?: T;
+}
 
-  const timestamp =  Date.now()
-  const method = "GET"
-  const path = "/wallet/balances"
+interface Balance {
+  coin: string,
+  total: number,
+  free: number,
+  availableWithoutBorrow: number,
+  usdValue: number,
+  spotBorrow: number
+}
 
-  const signatureHash = generateSignature({ timestamp, method, path })
+const getUSDBalance = async () => {
+  const { success, result: balances = [] }: Response<Balance[]> = await ftx.getBalances()
 
-  const headers = {
-    "FTX-KEY": FTX_API_KEY,
-    "FTX-TS": timestamp,
-    "FTX-SIGN": signatureHash,
+  if (!success) {
+    throw new Error("could not get balances")
   }
 
-  const { data } = await axios.get(path, { headers })
-
-  return data
+  const usdBalance = balances.find(balance => balance.coin === "USD")
+  
+  return usdBalance?.availableWithoutBorrow || 0
 }
-
-interface GenerateSignature {
-  timestamp: number;
-  method: string;
-  path: string;
-}
-
-const generateSignature = ({timestamp, method, path}: GenerateSignature) => {
-  const signature = `${timestamp}${method}${path}`
-
-  console.log(signature)
-
-  // SHA256 HMAC of the signature, using FTX_API_SECRET, as a hex string:
-  const hmac = crypto.createHmac("sha256", FTX_API_SECRET)
-  hmac.update(signature)
-  const signatureHash = hmac.digest("hex")
-
-  console.log({signatureHash})
-
-  return signatureHash
-}
-
-(async () => console.log(await getWallet()))()

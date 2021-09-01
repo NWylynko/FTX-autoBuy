@@ -25,14 +25,14 @@ __metadata:
   dependencies:
     "@tsconfig/node14": ^1.0.1
     "@types/node": ^16.7.10
-    axios: ^0.21.1
     dotenv: ^10.0.0
+    ftx-api: ^1.0.14
     source-map-support: ^0.5.19
     typescript: ^4.4.2
   languageName: unknown
   linkType: soft
 
-"axios@npm:^0.21.1":
+"axios@npm:^0.21.0":
   version: 0.21.1
   resolution: "axios@npm:0.21.1"
   dependencies:
@@ -62,6 +62,26 @@ __metadata:
     debug:
       optional: true
   checksum: 53195df4a2f36202177f40a2d59d497d630f3b20e2e51e2b697ee5f9c0a5261985f164b23d3744a574e117618af668d07c0d000c2c5cb0c1546851671585ac4e
+  languageName: node
+  linkType: hard
+
+"ftx-api@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "ftx-api@npm:1.0.14"
+  dependencies:
+    axios: ^0.21.0
+    isomorphic-ws: ^4.0.1
+    ws: ^7.4.0
+  checksum: 272650fc63b52bbaff9682a3c4d08f7676d4f250c16c2c7a385d55c7a1a73bf65d0317f7b5a9e1513a14da601b68e6303af1cf6029ef03bd1fd5cf7b96afaa1f
+  languageName: node
+  linkType: hard
+
+"isomorphic-ws@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "isomorphic-ws@npm:4.0.1"
+  peerDependencies:
+    ws: "*"
+  checksum: d7190eadefdc28bdb93d67b5f0c603385aaf87724fa2974abb382ac1ec9756ed2cfb27065cbe76122879c2d452e2982bc4314317f3d6c737ddda6c047328771a
   languageName: node
   linkType: hard
 
@@ -99,5 +119,20 @@ typescript@^4.4.2:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 11d6ab6e868117908c388401e2ac06d503c5c8709115ab80ee69a1a6352c1f98471d1e595636bfe6a2d6b20b03a44df6bb2d3d198cea97c0c328968cd18d2b70
+  languageName: node
+  linkType: hard
+
+"ws@npm:^7.4.0":
+  version: 7.5.4
+  resolution: "ws@npm:7.5.4"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 48582e4feb1fc6b6b977a0ee6136e5cd1c6a14bc5cb6ce5acf596652b34be757cdf0c225235b3263d56d057bc5d6e528dbe27fc88a3d09828aa803c6696f4b2c
   languageName: node
   linkType: hard
