@@ -12,7 +12,7 @@ const app = Fastify({ logger: true });
 interface Body { 
   cryptoPair?: string;
   cryptoAmount?: string;
-  action?: string;
+  action?: "buy" | "sell";
   api_shared_key?: string;
 }
 
