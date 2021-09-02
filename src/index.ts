@@ -9,9 +9,16 @@ const port = process.env.PORT || 4000;
 
 const app = Fastify({ logger: true });
 
+interface Body { 
+  cryptoPair?: string;
+  cryptoAmount?: string;
+  action?: string;
+  api_shared_key?: string;
+}
+
 app.post("/", async (req, res) => {
 
-  const { cryptoPair, cryptoAmount, action, api_shared_key } = req.body
+  const { cryptoPair, cryptoAmount, action, api_shared_key } = req.body as Body
 
   if (api_shared_key !== API_SHARED_KEY) {
     throw new Error("api key doesn't match")
