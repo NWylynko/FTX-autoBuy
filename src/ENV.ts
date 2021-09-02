@@ -1,16 +1,16 @@
 import "dotenv/config"
 
 const { 
-  FTX_API_KEY, 
-  FTX_API_SECRET, 
-  FTX_CRYPTO_PAIR = "ETH/USD", 
-  FTX_CRYPTO_AMOUNT = "0.001"
+  FTX_API_KEY,
+  FTX_API_SECRET,
+  API_SHARED_KEY
 } = process.env
 
-console.log({ FTX_API_KEY, 
-  FTX_API_SECRET, 
-  FTX_CRYPTO_PAIR, 
-  FTX_CRYPTO_AMOUNT })
+console.log({ 
+  FTX_API_KEY, 
+  FTX_API_SECRET,
+  API_SHARED_KEY
+})
 
 if (!FTX_API_KEY) {
   throw new Error("FTX_API_KEY is not set")
@@ -20,15 +20,12 @@ if (!FTX_API_SECRET) {
   throw new Error("FTX_API_SECRET is not set")
 }
 
-if (!FTX_CRYPTO_PAIR) {
-  throw new Error("FTX_CRYPTO_PAIR is not set")
+if (!API_SHARED_KEY) {
+  throw new Error("API_SHARED_KEY is not set")
 }
 
-if (!FTX_CRYPTO_AMOUNT) {
-  throw new Error("FTX_CRYPTO_AMOUNT is not set")
-}
-
-export { FTX_API_KEY, 
-  FTX_API_SECRET, 
-  FTX_CRYPTO_PAIR, 
-  FTX_CRYPTO_AMOUNT }
+export { 
+  FTX_API_KEY, 
+  FTX_API_SECRET,
+  API_SHARED_KEY
+ }

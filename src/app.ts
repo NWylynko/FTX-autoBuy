@@ -1,14 +1,18 @@
-import { FTX_CRYPTO_PAIR, FTX_CRYPTO_AMOUNT } from "./ENV"
-
 import { getUSDBalance } from "./getUSDBalance";
 import { getPrice } from "./getPrice"
 import { placeOrder } from "./placeOrder";
 
-export const app = async () => { 
-  const balance = await getUSDBalance();
-  const ethPrice = await getPrice(FTX_CRYPTO_PAIR);
+interface App {
+  cryptoPair: string;
+  cryptoAmount: string;
+  action: "buy" | "sell"
+}
 
-  const purchaseQuantity = parseFloat(FTX_CRYPTO_AMOUNT)
+export const app = async ({ cryptoPair, cryptoAmount, action }: App) => { 
+  const balance = await getUSDBalance();
+  const ethPrice = await getPrice(cryptoPair);
+
+  const purchaseQuantity = parseFloat(cryptoAmount)
   const cost = purchaseQuantity * ethPrice;
   const enoughBalance = cost < balance;
 
@@ -21,7 +25,7 @@ export const app = async () => {
     throw new Error("not enough funds available")
   }
 
-  const order = await placeOrder(FTX_CRYPTO_PAIR, purchaseQuantity)
+  const order = await placeOrder(cryptoPair, purchaseQuantity, action)
   console.log('order:', order)
 
   return { balance, ethPrice, cost, enoughBalance, order }
