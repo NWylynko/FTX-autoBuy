@@ -20,6 +20,8 @@ app.post("/", async (req, res) => {
 
   const { cryptoPair, cryptoAmount, action, api_shared_key } = req.body as Body
 
+  console.log({ cryptoPair, cryptoAmount, action, api_shared_key })
+
   if (api_shared_key !== API_SHARED_KEY) {
     throw new Error("api key doesn't match")
   }
